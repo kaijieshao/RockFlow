@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Center</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Your personal web interface for investment</h2>
+        <!-- Button for prediction page -->
+        <form action="{{ url_for('main.index') }}" method="get">
+            <button type="submit" class="sidebar-button">Predict Risk Tolerance</button>
+        </form>
+
+        <!-- Portfolio Selection button -->
+        <form action="{{ url_for('main.portfolio_selection') }}" method="get">
+            <button type="submit" class="sidebar-button">Portfolio Selection</button>
+        </form>
+        
+        <!-- Portfolio_VS_SP500 page button -->
+        <form action="{{ url_for('main.portfolio_vs_sp500') }}" method="get">
+            <button type="submit" class="sidebar-button">Portfolio vs SP500</button>
+        </form>
+
+        <!-- Default Strategy Implementation button (new) -->
+        <form action="{{ url_for('main.default_strategy') }}" method="get">
+            <button type="submit" class="sidebar-button">Default Strategy Implementation</button>
+        </form>
+
+        <!-- Individual Stock Analysis button (new) -->
+        <form action="{{ url_for('main.individual_stock_analysis') }}" method="get">
+            <button type="submit" class="sidebar-button">Individual Stock Analysis</button>
+        </form>
+
+        <!-- Personal Center button -->
+        <form action="{{ url_for('main.personal_center') }}" method="get">
+            <button type="submit" class="sidebar-button">Personal Center</button>
+        </form>
+
+        <!-- New Subscription Button -->
+        <form action="{{ url_for('main.subscription') }}" method="get">
+            <button type="submit" class="sidebar-button">Subscription for Full Service</button>
+        </form>
+
+        <!-- Add a button to navigate to the "Check All Assets" page -->
+        <form action="{{ url_for('main.my_assets') }}" method="get">
+            <button type="submit" class="sidebar-button">Check All Assets I Have</button>
+        </form>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Logout Button in Top-Right -->
+        <button style="width: 100px; height:35px;" class="logout-button" onclick="window.location.href='{{ url_for('main.logout') }}'">Logout</button>
+
+        {% if not subscription_status %}
+            <h1>Please subscribe to unlock features including deposit, buying, and selling stocks.</h1>
+        {% else %}
+            <h1>Welcome to your Personal Center</h1>
+            <p>Your current balance: ${{ balance }}</p>
+
+            <!-- Deposit form -->
+            <form method="POST">
+                <label for="deposit_amount">Deposit Amount:</label>
+                <input type="number" name="deposit_amount" required><br>
+                <label for="credit_card_number">Credit Card Number:</label>
+                <input type="text" name="credit_card_number" required><br>
+                <label for="cardholder_name">Cardholder Name:</label>
+                <input type="text" name="cardholder_name" required><br>
+                <label for="safety_code">Safety Code:</label>
+                <input type="text" name="safety_code" required><br><br>
+                <button type="submit" name="deposit">Deposit</button>
+            </form>
+
+            <!-- Buy stock form -->
+            <form method="POST">
+                <label for="stock_symbol">Stock Symbol:</label>
+                <input type="text" name="stock_symbol" required><br>
+                <label for="num_of_shares">Number of Shares:</label>
+                <input type="number" name="num_of_shares" required><br><br>
+                <button type="submit" name="buy_stock">Buy Stock</button>
+            </form>
+
+            <!-- Sell asset form -->
+            <form method="POST">
+                <label for="sell_stock_symbol">Stock Symbol:</label>
+                <input type="text" name="sell_stock_symbol" required><br>
+                <label for="sell_num_of_shares">Number of Shares:</label>
+                <input type="number" name="sell_num_of_shares" required><br><br>
+                <button type="submit" name="sell_asset">Sell Asset</button>
+            </form>
+        {% endif %}
+
+        <!-- Display Flash Message -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-container">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

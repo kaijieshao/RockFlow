@@ -1,0 +1,221 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 200px;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    color: white;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    text-align: center;
+    color: #fff;
+}
+
+.sidebar a {
+    display: block;
+    color: #fff;
+    padding: 10px;
+    text-decoration: none;
+    margin: 10px 0;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #575757;
+}
+
+/* Content area styling */
+.content {
+    margin-left: 220px;
+    padding: 20px;
+    position: relative;
+}
+
+/* Header and prediction box styling */
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Button styling */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #45a049;
+}
+
+/* Prediction box styles */
+input[type="number"],
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #fafafa;
+}
+
+/* Smaller Logout button styling */
+.logout-button {
+    position: absolute;
+    top: 50px;
+    right: 15px;
+    padding: 15px 30px;  /* Smaller padding for the logout button */
+    background-color: #f44336;
+    color: white;
+    font-size: 14px;  /* Smaller font size */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 10;  /* Ensure the button appears above other content */
+}
+
+/* Logout button hover effect */
+.logout-button:hover {
+    background-color: #e53935;
+}
+
+/* Flash message styling */
+.flash {
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.flash.success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.flash.danger {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Add responsiveness */
+@media (max-width: 600px) {
+    .content {
+        margin-left: 0;
+    }
+
+    .logout-button {
+        top: 10px;
+        right: 10px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}
+
+/* New styles specific to Personal Center */
+.personal-center {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.personal-center h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.personal-center .user-info {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.personal-center .user-info span {
+    font-weight: bold;
+}
+
+.personal-center form {
+    margin-top: 20px;
+}
+
+.personal-center label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.personal-center input[type="number"],
+.personal-center input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #fafafa;
+}
+
+.personal-center .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.personal-center .button-container button {
+    width: 48%; /* So buttons are side by side */
+}
+
+/* Deposit and Buy Stock buttons for Personal Center */
+.personal-center button.deposit,
+.personal-center button.buy-stock {
+    background-color: #008CBA; /* Blue for deposit and buy stock */
+}
+
+.personal-center button.deposit:hover,
+.personal-center button.buy-stock:hover {
+    background-color: #005f73;
+}
+
+.personal-center .flash {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.personal-center .flash.success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.personal-center .flash.danger {
+    background-color: #f44336;
+    color: white;
+}

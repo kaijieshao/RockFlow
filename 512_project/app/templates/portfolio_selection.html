@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Selection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Your personal web interface for investment</h2>
+        
+        <!-- Button for prediction page -->
+        <form action="{{ url_for('main.index') }}" method="get">
+            <button type="submit" class="sidebar-button">Predict Risk Tolerance</button>
+        </form>
+
+        <!-- Portfolio Selection button -->
+        <form action="{{ url_for('main.portfolio_selection') }}" method="get">
+            <button type="submit" class="sidebar-button">Portfolio Selection</button>
+        </form>
+
+        <!-- Portfolio_VS_SP500 page button -->
+        <form action="{{ url_for('main.portfolio_vs_sp500') }}" method="get">
+            <button type="submit" class="sidebar-button">Portfolio vs SP500</button>
+        </form>
+
+        <!-- Default Strategy Implementation button (new) -->
+        <form action="{{ url_for('main.default_strategy') }}" method="get">
+            <button type="submit" class="sidebar-button">Default Strategy Implementation</button>
+        </form>
+
+        <!-- Individual Stock Analysis button (new) -->
+        <form action="{{ url_for('main.individual_stock_analysis') }}" method="get">
+            <button type="submit" class="sidebar-button">Individual Stock Analysis</button>
+        </form>
+
+        <!-- Personal Center button -->
+        <form action="{{ url_for('main.personal_center') }}" method="get">
+            <button type="submit" class="sidebar-button">Personal Center</button>
+        </form>
+
+        <!-- New Subscription Button -->
+        <form action="{{ url_for('main.subscription') }}" method="get">
+            <button type="submit" class="sidebar-button">Subscription for Full Service</button>
+        </form>
+
+        <!-- Add a button to navigate to the "Check All Assets" page -->
+        <form action="{{ url_for('main.my_assets') }}" method="get">
+            <button type="submit" class="sidebar-button">Check All Assets I Have</button>
+        </form>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <!-- Logout Button in Top-Right -->
+        <button style="width: 100px; height:35px;" class="logout-button" onclick="window.location.href='{{ url_for('main.logout') }}'">Logout</button>
+
+        <h1>Portfolio Selection</h1>
+
+        <!-- Form to get input features and select multiple columns -->
+        <form method="POST">
+            <label for="amount_to_invest">Amount to Invest:</label>
+            <input type="number" step="0.01" name="amount_to_invest" required><br>
+
+            <label for="risk_level">Risk Level (0 to 100):</label>
+            <input type="number" step="0.01" min="0" max="100" name="risk_level" required><br>
+
+            <label for="selected_columns">Select Columns:</label>
+            <select name="selected_columns" width=300 style="width: 350px" size="8" multiple required>
+                {% for column in columns %}
+                    <option value="{{ column }}" {% if column in default_columns %}selected{% endif %}>{{ column }}</option>
+                {% endfor %}
+            </select><br><br>
+
+            <!-- Date input field with min and max date constraints -->
+            <label for="selected_date">Select a Date:</label>
+            <input type="date" name="selected_date" min="2018-01-02" max="2019-10-11" required><br><br>
+
+            <button type="submit">Generate Portfolio</button>
+        </form>
+
+        {% if plot1_html and plot2_html %}
+        <h2>Plots:</h2>
+        <div id="plot1">{{ plot1_html | safe }}</div>
+        <div id="plot2">{{ plot2_html | safe }}</div>
+
+        <h3>Result DataFrame:</h3>
+        <div>{{ result_df | safe }}</div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

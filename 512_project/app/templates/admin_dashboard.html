@@ -1,0 +1,63 @@
+<!-- templates/admin_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Admin Dashboard</h2>
+        <!-- Sidebar Links -->
+        <form action="{{ url_for('main.admin_dashboard') }}" method="get">
+            <button type="submit" class="sidebar-button">Dashboard Main Page</button>
+        </form>
+
+        <form action="{{ url_for('main.view_users') }}" method="get">
+            <button type="submit" class="sidebar-button">View All Users</button>
+        </form>
+
+        <form action="{{ url_for('main.view_subscribed_users') }}" method="get">
+            <button type="submit" class="sidebar-button">View Subscribed Users</button>
+        </form>
+
+        <form action="{{ url_for('main.view_transactions') }}" method="get">
+            <button type="submit" class="sidebar-button">View All Transactions</button>
+        </form>
+
+        <form action="{{ url_for('main.change_user_password') }}" method="get">
+            <button type="submit" class="sidebar-button">Change User's Password</button>
+        </form>
+
+        <form action="{{ url_for('main.delete_user') }}" method="get">
+            <button type="submit" class="sidebar-button">Delete User</button>
+        </form>
+
+        <form action="{{ url_for('main.stock_record_analysis') }}" method="get">
+            <button type="submit" class="sidebar-button">Check Stock Exchange History</button>
+        </form>
+        <!-- Additional links for the admin dashboard can be added here -->
+    </div>
+
+    <!-- Content Area -->
+    <div class="content">
+        <!-- Logout Button in Top-Right -->
+        <button style="width: 100px; height:35px;" class="logout-button" onclick="window.location.href='{{ url_for('auth.logout') }}'">Logout</button>
+
+        <h1>Welcome to the Admin Dashboard</h1>
+        <p>This is the admin panel where you can manage various functionalities.</p>
+        <p>Functionality 1: View all users registered.</p>
+        <p>Functionality 2: Ban users by deleting their account.</p>
+        <p>Functionality 3: Change the password for specific user.</p>
+        <p>Functionality 4: View system transactions.</p>
+        <p>Functionality 5: Analyze stocks purchased and sold most frequently.</p>
+        <p>Functionality 6: View all subscribed users.</p>
+        <!-- Optionally, other content and features for the admin can be added here -->
+    </div>
+
+</body>
+</html>

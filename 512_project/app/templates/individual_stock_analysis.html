@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Information</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Your personal web interface for investment</h2>
+        
+        <!-- Button for prediction page -->
+        <form action="{{ url_for('main.index') }}" method="get">
+            <button type="submit" class="sidebar-button">Predict Risk Tolerance</button>
+        </form>
+
+        <!-- Portfolio Selection button -->
+        <form action="{{ url_for('main.portfolio_selection') }}" method="get">
+            <button type="submit" class="sidebar-button">Portfolio Selection</button>
+        </form>
+
+        <!-- Portfolio_VS_SP500 page button -->
+        <form action="{{ url_for('main.portfolio_vs_sp500') }}" method="get">
+            <button type="submit" class="sidebar-button">Portfolio vs SP500</button>
+        </form>
+
+        <!-- Default Strategy Implementation button (new) -->
+        <form action="{{ url_for('main.default_strategy') }}" method="get">
+            <button type="submit" class="sidebar-button">Default Strategy Implementation</button>
+        </form>
+
+        <!-- Individual Stock Analysis button (new) -->
+        <form action="{{ url_for('main.individual_stock_analysis') }}" method="get">
+            <button type="submit" class="sidebar-button">Individual Stock Analysis</button>
+        </form>
+
+        <!-- Personal Center button -->
+        <form action="{{ url_for('main.personal_center') }}" method="get">
+            <button type="submit" class="sidebar-button">Personal Center</button>
+        </form>
+
+        <!-- New Subscription Button -->
+        <form action="{{ url_for('main.subscription') }}" method="get">
+            <button type="submit" class="sidebar-button">Subscription for Full Service</button>
+        </form>
+
+        <!-- Add a button to navigate to the "Check All Assets" page -->
+        <form action="{{ url_for('main.my_assets') }}" method="get">
+            <button type="submit" class="sidebar-button">Check All Assets I Have</button>
+        </form>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <!-- Logout Button in Top-Right -->
+        <button style="width: 100px; height:35px;" class="logout-button" onclick="window.location.href='{{ url_for('main.logout') }}'">Logout</button>
+        <h1>Individual Stock Analysis</h1>
+        <!-- Form to input stock symbol -->
+        <form method="POST">
+            <label for="symbol">Stock Symbol:</label>
+            <input type="text" name="symbol" id="symbol" placeholder="Enter stock symbol" required>
+            <button type="submit">Submit</button>
+        </form>
+
+        {% if stock_data %}
+            <h2>Stock Information for {{ stock_data['symbol'] }}</h2>
+            <p><strong>Company Name:</strong> {{ stock_data['company_name'] }}</p>
+            <p><strong>Sector:</strong> {{ stock_data['sector'] }}</p>
+            <p><strong>Industry:</strong> {{ stock_data['industry'] }}</p>
+            <p><strong>Market Capitalization:</strong> {{ stock_data['market_cap'] }}</p>
+            <p><strong>Price-to-Earnings Ratio:</strong> {{ stock_data['pe_ratio'] }}</p>
+            <p><strong>Earnings per Share:</strong> {{ stock_data['eps'] }}</p>
+            <p><strong>Dividend Yield:</strong> {{ stock_data['dividend'] }}</p>
+            <p><strong>Stock Exchange:</strong> {{ stock_data['exchange'] }}</p>
+            <p><strong>Current Price:</strong> {{ stock_data['current_price']}}</p>
+            <p><strong>Previous Close:</strong> {{ stock_data['previous_close']}}</p>
+            <p><strong>Open:</strong> {{ stock_data['open']}}</p>
+            <p><strong>Volume:</strong> {{ stock_data['volumn']}}</p>
+            <p><strong>52-Week High:</strong> {{ stock_data['52_week_high']}}</p>
+            <p><strong>52-Week Low:</strong> {{ stock_data['52_week_low']}}</p>
+            
+            <!-- Display Plot of Closing Prices -->
+            <h3>Stock Closing Price Chart (Past Year):</h3>
+            <div>{{ plot_url | safe }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
